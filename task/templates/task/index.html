@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if tasks %}
+<table class="table mb-4">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Todo item</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <th scope="row">{{ task.id }}</th>
+        <td>{{ task }}</td>
+        <td> {{ task.get_status_display }}</td>
+        <td>
+          <a href={% url 'task:delete' task.id %} class="btn btn-danger">Delete</a>
+          <a href={% url 'task:finished' task.id %} class="btn btn-success">Finished</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="row">
+    <div class="text-center col">
+        <h1 class="display-4"></h1>
+        <p class="lead font-weight-bold">Você não tem nenhuma task</p>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
